@@ -8,20 +8,24 @@ def bSearch(nums, target):
 
     while left <= right:
         mid = (left + right) // 2
+
+        # Check if the middle element is the target
         if nums[mid] == target:
             return mid
-
-        if nums[left] <= nums[mid]:
-            if nums[left] <= target <= nums[mid]:
+        
+        # Determine which part is sorted
+        if nums[left] <= nums[mid]:  # Left part is sorted
+            if nums[left] <= target < nums[mid]:  # Target is in the left part
                 right = mid - 1
-            else:
+            else:  # Target is in the right part
                 left = mid + 1
-        else:
-            if nums[mid] <= target <= nums[right]:
+        else:  # Right part is sorted
+            if nums[mid] < target <= nums[right]:  # Target is in the right part
                 left = mid + 1
-            else:
+            else:  # Target is in the left part
                 right = mid - 1
 
+    # Target not found
     return -1
 
 
